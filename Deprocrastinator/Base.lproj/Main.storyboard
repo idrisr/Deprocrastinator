@@ -98,6 +98,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="c4T-xF-OJV">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="Xga-n4-l7N">
+                            <connections>
+                                <action selector="onEditButtonPressed:" destination="BYZ-38-t0r" id="FVy-8E-zFT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wcb-Hd-635">
                             <connections>
                                 <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="30d-53-ObI"/>
