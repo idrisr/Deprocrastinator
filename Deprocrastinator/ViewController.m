@@ -10,8 +10,8 @@
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
-@property NSMutableArray *toDoItems;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSMutableArray *toDoItems;
 
 @end
 
@@ -19,6 +19,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.toDoItems = [[NSMutableArray alloc] init];
+    // TODO: make me pretty
+    self.inputTextField.layer.borderColor = [UIColor blackColor].CGColor;
+    self.inputTextField.layer.borderWidth = 2.0f;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -33,9 +37,10 @@
 
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
     NSString *task = self.inputTextField.text;
-    NSLog(@"%@", task);
     [self.toDoItems addObject:task];
     [self.tableView reloadData];
+    self.inputTextField.text = @"";
+    [self.inputTextField resignFirstResponder];
 }
 
 @end

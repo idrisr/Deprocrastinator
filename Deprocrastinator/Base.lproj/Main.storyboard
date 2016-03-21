@@ -19,22 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MRJ-LK-zxs">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellID" id="yMW-4i-xnX">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yMW-4i-xnX" id="nb7-ej-8Up">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="gt4-gg-GrI"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JWu-Ah-2WI"/>
-                                </connections>
-                            </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iq5-TE-lIR">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
@@ -53,6 +37,23 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MRJ-LK-zxs">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellID" id="yMW-4i-xnX">
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yMW-4i-xnX" id="nb7-ej-8Up">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="gt4-gg-GrI"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JWu-Ah-2WI"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -66,32 +67,32 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="MRJ-LK-zxs"/>
                                 <exclude reference="Iq5-TE-lIR"/>
+                                <exclude reference="MRJ-LK-zxs"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="BUD-bP-pkO"/>
                                 <exclude reference="Qb0-i0-sq4"/>
                                 <exclude reference="p3A-KB-aAc"/>
                                 <exclude reference="uvZ-vT-qdT"/>
                                 <exclude reference="M5c-l8-dPc"/>
                                 <exclude reference="Xvz-qP-N0S"/>
                                 <exclude reference="zce-Cq-EMv"/>
-                                <exclude reference="BUD-bP-pkO"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="MRJ-LK-zxs"/>
                                 <include reference="Iq5-TE-lIR"/>
+                                <include reference="MRJ-LK-zxs"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="BUD-bP-pkO"/>
                                 <include reference="Qb0-i0-sq4"/>
                                 <include reference="p3A-KB-aAc"/>
                                 <include reference="uvZ-vT-qdT"/>
                                 <include reference="M5c-l8-dPc"/>
                                 <include reference="Xvz-qP-N0S"/>
                                 <include reference="zce-Cq-EMv"/>
-                                <include reference="BUD-bP-pkO"/>
                             </mask>
                         </variation>
                     </view>
