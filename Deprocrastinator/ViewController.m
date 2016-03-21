@@ -69,12 +69,14 @@
 
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
     NSString *task = self.inputTextField.text;
-    [self.toDoItems addObject:task];
-    [self.colors addObject:[UIColor blackColor]];
+    if (![task isEqualToString:@""]) {
+        [self.toDoItems addObject:task];
+        [self.colors addObject:[UIColor blackColor]];
 
-    [self.tableView reloadData];
-    self.inputTextField.text = @"";
-    [self.inputTextField resignFirstResponder];
+        [self.tableView reloadData];
+        self.inputTextField.text = @"";
+        [self.inputTextField resignFirstResponder];
+    }
 }
 
 - (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender {
@@ -93,9 +95,22 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.colors removeObjectAtIndex:indexPath.row];
-        [self.toDoItems removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Really want to delete?" message:@"are you sure?" preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           [self.colors removeObjectAtIndex:indexPath.row];
+                                                           [self.toDoItems removeObjectAtIndex:indexPath.row];
+                                                           [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                                       }];
+
+        [alertController addAction:cancel];
+        [alertController addAction:delete];
+
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     else {
         NSLog(@"We can't delete this");
@@ -111,7 +126,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSLog(@"whatever");
+    UIColor *tmpColor = self.colors[sourceIndexPath.row];
+    NSString *tmpTodo = self.toDoItems[sourceIndexPath.row];
+
+    self.colors[sourceIndexPath.row] = self.colors[destinationIndexPath.row];
+    self.toDoItems[sourceIndexPath.row] = self.toDoItems[destinationIndexPath.row];
+
+    self.colors[destinationIndexPath.row] = tmpColor;
+    self.toDoItems[destinationIndexPath.row] = tmpTodo;
+
+    [self.tableView reloadData];
 }
 
 @end
