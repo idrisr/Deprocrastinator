@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *toDoItems;
+@property NSMutableArray *colors;
 
 @end
 
@@ -41,6 +42,11 @@
     [self.tableView reloadData];
     self.inputTextField.text = @"";
     [self.inputTextField resignFirstResponder];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    // Let's set colors here
 }
 
 @end
