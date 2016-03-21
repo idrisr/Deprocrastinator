@@ -14,6 +14,7 @@
 @property NSMutableArray *toDoItems;
 @property NSMutableArray *colors;
 @property BOOL isEditing;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeGesture;
 @end
 
 @implementation ViewController
@@ -34,10 +35,35 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+    UISwipeGestureRecognizer *swipeR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [swipeR setDirection:UISwipeGestureRecognizerDirectionRight];
+    [cell addGestureRecognizer:swipeR];
+
     cell.textLabel.text = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
     return cell;
+}
+
+-(void) handleSwipe:(UISwipeGestureRecognizer *) sender {
+    UITableViewCell *cell = (UITableViewCell *) sender.view;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    UIColor *currentColor = [self.colors objectAtIndex:indexPath.row];
+    UIColor *newColor = nil;
+
+    if (currentColor == [UIColor greenColor]){
+        newColor = [UIColor yellowColor];
+    } else if (currentColor == [UIColor yellowColor]){
+        newColor = [UIColor redColor];
+    } else if (currentColor == [UIColor redColor]){
+        newColor = [UIColor blackColor];
+    } else if (currentColor == [UIColor blackColor]){
+        newColor = [UIColor greenColor];
+    }
+
+    self.colors[indexPath.row] = newColor;
+    [self.tableView reloadData];
 }
 
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
@@ -83,11 +109,11 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.colors removeObjectAtIndex:indexPath.row];
         [self.toDoItems removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else {
         NSLog(@"We can't delete this");
     }
 }
-
 
 @end
