@@ -9,6 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITextField *inputTextField;
+@property NSMutableArray *toDoItems;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -19,16 +22,20 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.toDoItems.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%li", indexPath.row];
+    cell.textLabel.text = [self.toDoItems objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
+    NSString *task = self.inputTextField.text;
+    NSLog(@"%@", task);
+    [self.toDoItems addObject:task];
+    [self.tableView reloadData];
 }
 
 @end

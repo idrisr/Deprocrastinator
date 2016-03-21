@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,6 +19,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MRJ-LK-zxs">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellID" id="yMW-4i-xnX">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yMW-4i-xnX" id="nb7-ej-8Up">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="gt4-gg-GrI"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JWu-Ah-2WI"/>
+                                </connections>
+                            </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iq5-TE-lIR">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
@@ -39,28 +56,42 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MRJ-LK-zxs" secondAttribute="bottom" id="BUD-bP-pkO"/>
+                            <constraint firstItem="MRJ-LK-zxs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="M5c-l8-dPc"/>
                             <constraint firstItem="Iq5-TE-lIR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Qb0-i0-sq4"/>
+                            <constraint firstAttribute="trailing" secondItem="MRJ-LK-zxs" secondAttribute="trailing" id="Xvz-qP-N0S"/>
                             <constraint firstItem="Iq5-TE-lIR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="p3A-KB-aAc"/>
                             <constraint firstItem="Iq5-TE-lIR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="uvZ-vT-qdT"/>
+                            <constraint firstItem="MRJ-LK-zxs" firstAttribute="top" secondItem="Iq5-TE-lIR" secondAttribute="bottom" id="zce-Cq-EMv"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="MRJ-LK-zxs"/>
                                 <exclude reference="Iq5-TE-lIR"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Qb0-i0-sq4"/>
                                 <exclude reference="p3A-KB-aAc"/>
                                 <exclude reference="uvZ-vT-qdT"/>
+                                <exclude reference="M5c-l8-dPc"/>
+                                <exclude reference="Xvz-qP-N0S"/>
+                                <exclude reference="zce-Cq-EMv"/>
+                                <exclude reference="BUD-bP-pkO"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
+                                <include reference="MRJ-LK-zxs"/>
                                 <include reference="Iq5-TE-lIR"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Qb0-i0-sq4"/>
                                 <include reference="p3A-KB-aAc"/>
                                 <include reference="uvZ-vT-qdT"/>
+                                <include reference="M5c-l8-dPc"/>
+                                <include reference="Xvz-qP-N0S"/>
+                                <include reference="zce-Cq-EMv"/>
+                                <include reference="BUD-bP-pkO"/>
                             </mask>
                         </variation>
                     </view>
@@ -72,6 +103,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="inputTextField" destination="Iq5-TE-lIR" id="7HC-iJ-ekI"/>
+                        <outlet property="tableView" destination="MRJ-LK-zxs" id="Ize-Jt-YDh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
