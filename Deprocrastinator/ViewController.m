@@ -70,8 +70,8 @@
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
     NSString *task = self.inputTextField.text;
     if (![task isEqualToString:@""]) {
-        [self.toDoItems addObject:task];
-        [self.colors addObject:[UIColor blackColor]];
+        [self.toDoItems insertObject:task atIndex:0];
+        [self.colors insertObject:[UIColor blackColor] atIndex:0];
 
         [self.tableView reloadData];
         self.inputTextField.text = @"";
@@ -98,7 +98,12 @@
 
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Really want to delete?" message:@"are you sure?" preferredStyle:UIAlertControllerStyleAlert];
 
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                                                       }];
+        
         UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
