@@ -24,6 +24,7 @@
     self.toDoItems = [[NSMutableArray alloc] init];
     self.colors = [[NSMutableArray alloc] init];
     self.isEditing = NO;
+    self.tableView.editing = NO;
 
     // TODO: make me pretty
     self.inputTextField.layer.borderColor = [UIColor blackColor].CGColor;
@@ -76,17 +77,6 @@
     [self.inputTextField resignFirstResponder];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.isEditing) {
-        [self.colors removeObjectAtIndex:indexPath.row];
-        [self.toDoItems removeObjectAtIndex:indexPath.row];
-    } else {
-        self.colors[indexPath.row] = [UIColor greenColor];
-        [self.tableView reloadData];
-    }
-    [self.tableView reloadData];
-}
-
 - (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender {
     self.isEditing = !self.isEditing;
     if (self.isEditing) {
@@ -94,15 +84,11 @@
     } else {
         sender.title = @"Edit";
     }
+    self.tableView.editing = !self.tableView.editing;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.isEditing) {
-        return UITableViewCellEditingStyleNone;
-    }
-    else {
         return UITableViewCellEditingStyleDelete;
-    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,6 +100,18 @@
     else {
         NSLog(@"We can't delete this");
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSLog(@"whatever");
 }
 
 @end
