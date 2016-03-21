@@ -70,5 +70,24 @@
     }
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isEditing) {
+        return UITableViewCellEditingStyleNone;
+    }
+    else {
+        return UITableViewCellEditingStyleDelete;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.colors removeObjectAtIndex:indexPath.row];
+        [self.toDoItems removeObjectAtIndex:indexPath.row];
+    }
+    else {
+        NSLog(@"We can't delete this");
+    }
+}
+
 
 @end
