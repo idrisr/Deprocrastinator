@@ -101,7 +101,10 @@
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
                                                          style:UIAlertActionStyleCancel
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                                                           UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                                                           [cell setEditing:NO animated:YES];
+                                                           [tableView reloadRowsAtIndexPaths:@[indexPath]
+                                                                            withRowAnimation:UITableViewRowAnimationNone];
                                                        }];
         
         UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
